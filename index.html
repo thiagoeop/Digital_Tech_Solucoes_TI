@@ -7,6 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="supabase-url" content="">
     <title>Digital Tech - Cadastro de Cliente</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -414,9 +415,8 @@
             }
         });
         // Form submission handlers
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            // Coletar dados do formulário
             const clientData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -426,13 +426,30 @@
                 city: document.getElementById('city').value
             };
             localStorage.setItem('clientData', JSON.stringify(clientData));
-            // Redirecionar para confirmação
+            try {
+                const supabaseUrl = document.querySelector('meta[name="supabase-url"]')?.content || '';
+                if (window.supabase && supabaseUrl) {
+                    const { data, error } = await window.supabase
+                        .from('clientes')
+                        .insert(clientData)
+                        .select()
+                        .single();
+                    if (error) {
+                        alert('Erro ao salvar no banco: ' + error.message);
+                    } else {
+                        const d = new Date();
+                        const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+                        localStorage.setItem('clientProtocol', data?.id ? `DT-${ymd}-${String(data.id)}` : `DT-${ymd}`);
+                    }
+                }
+            } catch (err) {
+                alert('Erro ao salvar no banco.');
+            }
             window.location.href = 'confirmacao.html';
         });
 
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+        document.getElementById('quoteForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            // Coletar dados do formulário de orçamento
             const serviceData = {
                 serviceType: document.getElementById('serviceType').value,
                 equipmentType: document.getElementById('equipmentType').value,
@@ -441,7 +458,25 @@
                 clientEmail: document.getElementById('clientEmail').value
             };
             localStorage.setItem('serviceData', JSON.stringify(serviceData));
-            // Redirecionar para confirmação
+            try {
+                const supabaseUrl = document.querySelector('meta[name="supabase-url"]')?.content || '';
+                if (window.supabase && supabaseUrl) {
+                    const { data, error } = await window.supabase
+                        .from('solicitacoes')
+                        .insert(serviceData)
+                        .select()
+                        .single();
+                    if (error) {
+                        alert('Erro ao salvar no banco: ' + error.message);
+                    } else {
+                        const d = new Date();
+                        const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+                        localStorage.setItem('serviceProtocol', data?.id ? `DT-${ymd}-${String(data.id)}` : `DT-${ymd}`);
+                    }
+                }
+            } catch (err) {
+                alert('Erro ao salvar no banco.');
+            }
             window.location.href = 'confirmacao.html';
         });
 
@@ -478,6 +513,12 @@
             value = value.replace(/(\d)(\d{4})$/, '$1-$2');
             e.target.value = value;
         });
+    </script>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+        const SUPABASE_URL = document.querySelector('meta[name="supabase-url"]')?.content || '';
+        const SUPABASE_KEY = 'sb_publishable_VnUv3wfgnZgYiS2L0e3Skg_CqBaDwT9';
+        window.supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     </script>
 </body>
 </html>
