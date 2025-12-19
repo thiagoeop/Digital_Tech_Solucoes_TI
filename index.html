@@ -3,62 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <meta name="theme-color" content="#4f46e5">
+    <meta name="theme-color" content="#6366f1">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Digital Tech - Soluções em TI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-dark: #4338ca;
-            --secondary: #7c3aed;
-            --accent: #f59e0b;
-            --dark: #1f2937;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #0ea5e9;
+            --dark: #0f172a;
             --light: #f8fafc;
+            --surface: #1e293b;
+            --surface-light: #334155;
         }
         
         body {
-            background-color: #0f172a;
+            background-color: var(--dark);
             color: #e2e8f0;
             font-family: 'Inter', system-ui, sans-serif;
+            scroll-behavior: smooth;
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
         }
         
         .gradient-text {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(var(--dark), var(--dark)) padding-box,
+                        linear-gradient(135deg, var(--primary), var(--accent)) border-box;
+            border: 2px solid transparent;
+        }
+        
         .card-glass {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .card-glass:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(30, 41, 59, 0.8);
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
             transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
         }
         
         .btn-secondary {
@@ -71,6 +103,7 @@
         .btn-secondary:hover {
             background: var(--primary);
             color: white;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
         }
         
         .section-title {
@@ -82,19 +115,19 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             border-radius: 2px;
         }
         
         .hero-pattern {
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%);
         }
         
         .animate-float {
@@ -118,113 +151,189 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+        
+        .service-icon {
+            transition: all 0.4s ease;
+        }
+        
+        .card-glass:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .form-input {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .floating-element {
+            animation: float 8s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 1s);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .stagger-delay > * {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: calc(var(--i) * 0.1s);
         }
         
         @media (max-width: 640px) {
             .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
             }
             
             h1 {
-                font-size: 2rem !important;
+                font-size: 2.25rem !important;
             }
             
             h2 {
-                font-size: 1.75rem !important;
+                font-size: 1.875rem !important;
             }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 5px;
         }
     </style>
 </head>
 <body class="antialiased">
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md border-b border-gray-800">
-        <div class="container mx-auto px-4 py-4">
+    <header class="fixed top-0 w-full z-50 bg-dark/80 backdrop-blur-lg border-b border-white/5">
+        <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <div class="gradient-bg p-2 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="gradient-bg p-3 rounded-xl shadow-lg">
                         <i class="fas fa-laptop-code text-white text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-white">Digital Tech</h1>
-                        <p class="text-xs text-gray-400">Soluções em TI</p>
+                        <h1 class="text-2xl font-bold text-white">Digital Tech</h1>
+                        <p class="text-sm text-gray-400">Soluções Inteligentes em TI</p>
                     </div>
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:block">
-                    <ul class="flex space-x-8">
-                        <li><a href="#hero" class="text-gray-300 hover:text-white transition font-medium">Início</a></li>
-                        <li><a href="#services" class="text-gray-300 hover:text-white transition font-medium">Serviços</a></li>
-                        <li><a href="cadastro.html" class="text-gray-300 hover:text-white transition font-medium">Cadastro</a></li>
-                        <li><a href="orcamento.html" class="btn-primary px-6 py-2 rounded-lg font-medium">Orçamento</a></li>
+                <nav class="hidden lg:block">
+                    <ul class="flex space-x-10">
+                        <li><a href="#hero" class="nav-link text-gray-300 hover:text-white transition font-medium">Início</a></li>
+                        <li><a href="#services" class="nav-link text-gray-300 hover:text-white transition font-medium">Serviços</a></li>
+                        <li><a href="#about" class="nav-link text-gray-300 hover:text-white transition font-medium">Sobre</a></li>
+                        <li><a href="cadastro.html" class="nav-link text-gray-300 hover:text-white transition font-medium">Cadastro</a></li>
+                        <li><a href="orcamento.html" class="btn-primary px-8 py-3 rounded-xl font-medium shadow-lg">Orçamento</a></li>
                     </ul>
                 </nav>
                 
                 <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="md:hidden text-2xl text-gray-300 hover:text-white">
+                <button id="mobileMenuBtn" class="lg:hidden text-2xl text-gray-300 hover:text-white transition">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
             
             <!-- Mobile Menu -->
-            <div id="mobileMenu" class="md:hidden hidden mt-4 bg-gray-800 rounded-lg p-4">
-                <ul class="space-y-3">
-                    <li><a href="#hero" class="block py-2 text-gray-300 hover:text-white">Início</a></li>
-                    <li><a href="#services" class="block py-2 text-gray-300 hover:text-white">Serviços</a></li>
-                    <li><a href="cadastro.html" class="block py-2 text-gray-300 hover:text-white">Cadastro</a></li>
-                    <li><a href="orcamento.html" class="block py-2 btn-primary rounded-lg text-center">Orçamento</a></li>
-                    <li><a href="#contact" class="block py-2 text-gray-300 hover:text-white">Contato</a></li>
+            <div id="mobileMenu" class="lg:hidden hidden mt-6 bg-surface rounded-2xl p-6 shadow-2xl">
+                <ul class="space-y-4">
+                    <li><a href="#hero" class="block py-3 px-4 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">Início</a></li>
+                    <li><a href="#services" class="block py-3 px-4 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">Serviços</a></li>
+                    <li><a href="#about" class="block py-3 px-4 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">Sobre</a></li>
+                    <li><a href="cadastro.html" class="block py-3 px-4 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">Cadastro</a></li>
+                    <li><a href="orcamento.html" class="block py-3 btn-primary rounded-lg text-center font-medium">Orçamento</a></li>
                 </ul>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative overflow-hidden hero-pattern">
-        <div class="container mx-auto px-4 py-20 md:py-28">
-            <div class="max-w-3xl mx-auto text-center">
-                <div class="inline-flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-full mb-6">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-sm">Atendimento em até 24h</span>
+    <section id="hero" class="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden hero-pattern">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        
+        <div class="container mx-auto px-6 relative">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <div class="inline-flex items-center space-x-3 bg-white/5 px-6 py-3 rounded-full mb-8 backdrop-blur-sm">
+                    <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-sm font-medium">Atendimento em até 24 horas</span>
                 </div>
                 
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">
-                    <span class="text-white">Manutenção Profissional</span>
-                    <span class="gradient-text block">de Computadores</span>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+                    <span class="text-white">Soluções em</span>
+                    <span class="gradient-text block">Tecnologia Digital</span>
                 </h1>
                 
-                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                    Soluções completas em tecnologia para sua empresa ou residência. 
-                    Qualidade, agilidade e garantia em todos os serviços.
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Transformamos sua experiência digital com soluções completas em TI. 
+                    Qualidade, inovação e suporte especializado para sua empresa ou residência.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="cadastro.html" class="btn-primary px-8 py-4 rounded-lg font-semibold text-lg">
-                        <i class="fas fa-user-plus mr-2"></i>Cadastrar Agora
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+                    <a href="cadastro.html" class="btn-primary px-10 py-5 rounded-xl font-semibold text-lg shadow-xl transform hover:-translate-y-1 transition">
+                        <i class="fas fa-rocket mr-3"></i>Começar Agora
                     </a>
-                    <a href="#contact" class="btn-secondary px-8 py-4 rounded-lg font-semibold text-lg">
-                        <i class="fas fa-phone-alt mr-2"></i>Fale Conosco
+                    <a href="#services" class="btn-secondary px-10 py-5 rounded-xl font-semibold text-lg">
+                        <i class="fas fa-eye mr-3"></i>Ver Serviços
                     </a>
                 </div>
                 
-                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div class="stat-card card-glass p-4 rounded-xl">
-                        <div class="text-3xl font-bold gradient-text mb-2">5+</div>
-                        <div class="text-gray-400 text-sm">Anos no mercado</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto stagger-delay">
+                    <div class="stat-card card-glass p-6 rounded-2xl" style="--i: 0">
+                        <div class="text-4xl font-bold gradient-text mb-3">5+</div>
+                        <div class="text-gray-400 font-medium">Anos de Excelência</div>
                     </div>
-                    <div class="stat-card card-glass p-4 rounded-xl">
-                        <div class="text-3xl font-bold gradient-text mb-2">500+</div>
-                        <div class="text-gray-400 text-sm">Clientes satisfeitos</div>
+                    <div class="stat-card card-glass p-6 rounded-2xl" style="--i: 1">
+                        <div class="text-4xl font-bold gradient-text mb-3">500+</div>
+                        <div class="text-gray-400 font-medium">Clientes Satisfeitos</div>
                     </div>
-                    <div class="stat-card card-glass p-4 rounded-xl">
-                        <div class="text-3xl font-bold gradient-text mb-2">24h</div>
-                        <div class="text-gray-400 text-sm">Resposta rápida</div>
+                    <div class="stat-card card-glass p-6 rounded-2xl" style="--i: 2">
+                        <div class="text-4xl font-bold gradient-text mb-3">24h</div>
+                        <div class="text-gray-400 font-medium">Suporte Rápido</div>
                     </div>
-                    <div class="stat-card card-glass p-4 rounded-xl">
-                        <div class="text-3xl font-bold gradient-text mb-2">100%</div>
-                        <div class="text-gray-400 text-sm">Garantia</div>
+                    <div class="stat-card card-glass p-6 rounded-2xl" style="--i: 3">
+                        <div class="text-4xl font-bold gradient-text mb-3">100%</div>
+                        <div class="text-gray-400 font-medium">Garantia Total</div>
                     </div>
                 </div>
             </div>
@@ -232,101 +341,193 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title text-3xl font-bold text-center text-white">Nossos Serviços</h2>
+    <section id="services" class="py-20 bg-surface">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+                <span class="gradient-text font-semibold text-sm uppercase tracking-wider mb-4 block">Nossos Serviços</span>
+                <h2 class="section-title text-4xl font-bold text-white">Soluções Tecnológicas Completas</h2>
+                <p class="text-gray-400 text-lg mt-8">Oferecemos serviços especializados para todas as suas necessidades em tecnologia</p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto stagger-delay">
                 <!-- Service 1 -->
-                <div class="card-glass p-6 rounded-xl">
-                    <div class="gradient-bg w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-tools text-white text-xl"></i>
+                <div class="card-glass p-8 rounded-2xl" style="--i: 0">
+                    <div class="gradient-bg w-16 h-16 rounded-2xl flex items-center justify-center mb-6 service-icon">
+                        <i class="fas fa-tools text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Manutenção Preventiva</h3>
-                    <p class="text-gray-400 mb-4">
-                        Limpeza interna, troca de pasta térmica e otimização do sistema para prevenir falhas.
+                    <h3 class="text-xl font-bold text-white mb-4">Manutenção Preventiva</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Limpeza interna, otimização de sistema e manutenção proativa para evitar falhas futuras.
                     </p>
-                    <a href="orcamento.html" class="text-primary hover:text-primary-dark inline-flex items-center text-sm font-medium">
-                        Solicitar <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="flex items-center justify-between">
+                        <a href="orcamento.html" class="text-primary hover:text-primary-light inline-flex items-center font-medium group">
+                            Solicitar Serviço
+                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                        <span class="text-sm text-gray-500">A partir de R$ 99</span>
+                    </div>
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="card-glass p-6 rounded-xl">
-                    <div class="gradient-bg w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                <div class="card-glass p-8 rounded-2xl" style="--i: 1">
+                    <div class="gradient-bg w-16 h-16 rounded-2xl flex items-center justify-center mb-6 service-icon">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Remoção de Vírus</h3>
-                    <p class="text-gray-400 mb-4">
-                        Identificação e remoção completa de malware, spyware e vírus com ferramentas profissionais.
+                    <h3 class="text-xl font-bold text-white mb-4">Segurança Digital</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Proteção completa contra malware, spyware e vírus com soluções de segurança avançadas.
                     </p>
-                    <a href="orcamento.html" class="text-primary hover:text-primary-dark inline-flex items-center text-sm font-medium">
-                        Solicitar <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="flex items-center justify-between">
+                        <a href="orcamento.html" class="text-primary hover:text-primary-light inline-flex items-center font-medium group">
+                            Solicitar Serviço
+                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                        <span class="text-sm text-gray-500">A partir de R$ 149</span>
+                    </div>
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="card-glass p-6 rounded-xl">
-                    <div class="gradient-bg w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-hdd text-white text-xl"></i>
+                <div class="card-glass p-8 rounded-2xl" style="--i: 2">
+                    <div class="gradient-bg w-16 h-16 rounded-2xl flex items-center justify-center mb-6 service-icon">
+                        <i class="fas fa-database text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Recuperação de Dados</h3>
-                    <p class="text-gray-400 mb-4">
-                        Recuperação de arquivos perdidos em HDs, SSDs e dispositivos de armazenamento.
+                    <h3 class="text-xl font-bold text-white mb-4">Recuperação de Dados</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Recuperação especializada de arquivos em HDs, SSDs e dispositivos de armazenamento.
                     </p>
-                    <a href="orcamento.html" class="text-primary hover:text-primary-dark inline-flex items-center text-sm font-medium">
-                        Solicitar <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="flex items-center justify-between">
+                        <a href="orcamento.html" class="text-primary hover:text-primary-light inline-flex items-center font-medium group">
+                            Solicitar Serviço
+                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                        <span class="text-sm text-gray-500">Sob consulta</span>
+                    </div>
                 </div>
                 
                 <!-- Service 4 -->
-                <div class="card-glass p-6 rounded-xl">
-                    <div class="gradient-bg w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-wifi text-white text-xl"></i>
+                <div class="card-glass p-8 rounded-2xl" style="--i: 3">
+                    <div class="gradient-bg w-16 h-16 rounded-2xl flex items-center justify-center mb-6 service-icon">
+                        <i class="fas fa-network-wired text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Redes e Wi-Fi</h3>
-                    <p class="text-gray-400 mb-4">
-                        Configuração e solução de problemas em redes cabeadas e sem fio para melhor conexão.
+                    <h3 class="text-xl font-bold text-white mb-4">Redes e Wi-Fi</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Configuração e otimização de redes cabeadas e sem fio para máxima performance.
                     </p>
-                    <a href="orcamento.html" class="text-primary hover:text-primary-dark inline-flex items-center text-sm font-medium">
-                        Solicitar <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="flex items-center justify-between">
+                        <a href="orcamento.html" class="text-primary hover:text-primary-light inline-flex items-center font-medium group">
+                            Solicitar Serviço
+                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                        <span class="text-sm text-gray-500">A partir de R$ 199</span>
+                    </div>
                 </div>
                 
                 <!-- Service 5 -->
-                <div class="card-glass p-6 rounded-xl">
-                    <div class="gradient-bg w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-desktop text-white text-xl"></i>
+                <div class="card-glass p-8 rounded-2xl" style="--i: 4">
+                    <div class="gradient-bg w-16 h-16 rounded-2xl flex items-center justify-center mb-6 service-icon">
+                        <i class="fas fa-microchip text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Upgrade de Hardware</h3>
-                    <p class="text-gray-400 mb-4">
-                        Atualização de componentes para melhorar desempenho do seu computador.
+                    <h3 class="text-xl font-bold text-white mb-4">Upgrade de Hardware</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Atualização de componentes para melhor desempenho e maior produtividade.
                     </p>
-                    <a href="orcamento.html" class="text-primary hover:text-primary-dark inline-flex items-center text-sm font-medium">
-                        Solicitar <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="flex items-center justify-between">
+                        <a href="orcamento.html" class="text-primary hover:text-primary-light inline-flex items-center font-medium group">
+                            Solicitar Serviço
+                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                        <span class="text-sm text-gray-500">Sob consulta</span>
+                    </div>
                 </div>
                 
                 <!-- Service 6 -->
-                <div class="card-glass p-6 rounded-xl">
-                    <div class="gradient-bg w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-cloud text-white text-xl"></i>
+                <div class="card-glass p-8 rounded-2xl" style="--i: 5">
+                    <div class="gradient-bg w-16 h-16 rounded-2xl flex items-center justify-center mb-6 service-icon">
+                        <i class="fas fa-cloud text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Backup em Nuvem</h3>
-                    <p class="text-gray-400 mb-4">
-                        Solução segura para backup automático de seus arquivos importantes na nuvem.
+                    <h3 class="text-xl font-bold text-white mb-4">Backup em Nuvem</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Solução segura de backup automático para proteger seus dados importantes.
                     </p>
-                    <a href="orcamento.html" class="text-primary hover:text-primary-dark inline-flex items-center text-sm font-medium">
-                        Solicitar <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="flex items-center justify-between">
+                        <a href="orcamento.html" class="text-primary hover:text-primary-light inline-flex items-center font-medium group">
+                            Solicitar Serviço
+                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                        <span class="text-sm text-gray-500">A partir de R$ 49/mês</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="text-center mt-12">
-                <p class="text-gray-400 mb-6">Precisa de outro serviço? Entre em contato!</p>
-                <a href="orcamento.html" class="btn-primary px-8 py-3 rounded-lg font-semibold inline-flex items-center">
-                    <i class="fas fa-clipboard-list mr-2"></i>Solicitar Orçamento
+            <div class="text-center mt-16 fade-in">
+                <a href="orcamento.html" class="btn-primary px-10 py-4 rounded-xl font-semibold text-lg inline-flex items-center shadow-xl">
+                    <i class="fas fa-calendar-check mr-3"></i>Agendar Consulta Gratuita
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <span class="gradient-text font-semibold text-sm uppercase tracking-wider mb-4 block">Sobre Nós</span>
+                    <h2 class="text-4xl font-bold text-white mb-8">Inovação e Expertise em Tecnologia</h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Na Digital Tech, combinamos conhecimento técnico avançado com um atendimento humanizado para oferecer as melhores soluções em TI para sua empresa ou residência.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="gradient-bg p-3 rounded-xl mr-5 flex-shrink-0">
+                                <i class="fas fa-award text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Qualidade Certificada</h4>
+                                <p class="text-gray-400">Técnicos certificados e treinados nas principais tecnologias do mercado.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="gradient-bg p-3 rounded-xl mr-5 flex-shrink-0">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Agilidade</h4>
+                                <p class="text-gray-400">Atendimento rápido com resposta em até 24 horas para urgências.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="gradient-bg p-3 rounded-xl mr-5 flex-shrink-0">
+                                <i class="fas fa-shield-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Garantia Total</h4>
+                                <p class="text-gray-400">90 dias de garantia em todos os serviços prestados pela nossa equipe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative fade-in">
+                    <div class="card-glass p-8 rounded-2xl">
+                        <div class="aspect-video rounded-xl overflow-hidden mb-6">
+                            <!-- Placeholder for video or image -->
+                            <div class="w-full h-full gradient-bg flex items-center justify-center">
+                                <i class="fas fa-play text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Nossa Metodologia</h3>
+                        <p class="text-gray-400 mb-6">
+                            Trabalhamos com um processo padronizado de diagnóstico, solução e teste para garantir a excelência em cada serviço.
+                        </p>
+                        <a href="#contact" class="btn-secondary px-6 py-3 rounded-lg font-medium inline-flex items-center">
+                            <i class="fas fa-video mr-3"></i>Agendar Demonstração
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -334,124 +535,159 @@
     <!-- CTA Section -->
     <section class="py-20 gradient-bg relative overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
+            <div class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-float"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3 animate-float" style="animation-delay: 2s;"></div>
         </div>
         
-        <div class="container mx-auto px-4 relative">
+        <div class="container mx-auto px-6 relative">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-white mb-6">
-                    Pronto para otimizar sua tecnologia?
+                <h2 class="text-4xl font-bold text-white mb-6">
+                    Pronto para Transformar sua Experiência Digital?
                 </h2>
-                <p class="text-xl text-blue-100 mb-10">
-                    Cadastre-se agora e ganhe 10% de desconto no primeiro serviço!
+                <p class="text-xl text-white/80 mb-10">
+                    Cadastre-se agora e receba 15% de desconto no primeiro serviço!
                 </p>
                 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="cadastro.html" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition">
-                        <i class="fas fa-gift mr-2"></i>Cadastrar com Desconto
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="cadastro.html" class="bg-white text-primary px-10 py-5 rounded-xl font-semibold text-lg hover:bg-gray-50 transition shadow-xl transform hover:-translate-y-1">
+                        <i class="fas fa-gift mr-3"></i>Cadastrar com Desconto
                     </a>
-                    <a href="orcamento.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/10 transition">
-                        <i class="fas fa-calculator mr-2"></i>Solicitar Orçamento
+                    <a href="orcamento.html" class="bg-transparent border-2 border-white text-white px-10 py-5 rounded-xl font-semibold text-lg hover:bg-white/10 transition">
+                        <i class="fas fa-calculator mr-3"></i>Solicitar Orçamento
                     </a>
                 </div>
                 
-                <p class="text-blue-100 text-sm mt-8">
-                    <i class="fas fa-shield-alt mr-2"></i>Garantia de 90 dias em todos os serviços
-                </p>
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="text-white/90">
+                        <i class="fas fa-shield-alt text-2xl mb-3"></i>
+                        <p class="text-sm">Garantia de 90 dias</p>
+                    </div>
+                    <div class="text-white/90">
+                        <i class="fas fa-headset text-2xl mb-3"></i>
+                        <p class="text-sm">Suporte 24/7</p>
+                    </div>
+                    <div class="text-white/90">
+                        <i class="fas fa-truck text-2xl mb-3"></i>
+                        <p class="text-sm">Serviço Remoto/Visita</p>
+                    </div>
+                    <div class="text-white/90">
+                        <i class="fas fa-lock text-2xl mb-3"></i>
+                        <p class="text-sm">Segurança Garantida</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title text-3xl font-bold text-center text-white">Entre em Contato</h2>
+    <section id="contact" class="py-20 bg-surface">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in">
+                <span class="gradient-text font-semibold text-sm uppercase tracking-wider mb-4 block">Contato</span>
+                <h2 class="section-title text-4xl font-bold text-white">Entre em Contato</h2>
+                <p class="text-gray-400 text-lg mt-8">Estamos prontos para ajudar com suas necessidades em tecnologia</p>
+            </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
                 <!-- Contact Info -->
-                <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Fale Conosco</h3>
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold text-white mb-8">Fale Conosco</h3>
                     
-                    <div class="space-y-6">
+                    <div class="space-y-8">
                         <div class="flex items-start">
-                            <div class="gradient-bg p-3 rounded-lg mr-4">
-                                <i class="fas fa-map-marker-alt text-white"></i>
+                            <div class="gradient-bg p-4 rounded-xl mr-5">
+                                <i class="fas fa-map-marker-alt text-white text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">Endereço</h4>
+                                <h4 class="font-semibold text-white mb-2">Endereço</h4>
                                 <p class="text-gray-400">Rua Colônia, 134 - Jardim Europa 1<br>Ituiutaba/MG</p>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
-                            <div class="gradient-bg p-3 rounded-lg mr-4">
-                                <i class="fas fa-phone-alt text-white"></i>
+                            <div class="gradient-bg p-4 rounded-xl mr-5">
+                                <i class="fas fa-phone-alt text-white text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">Telefone/WhatsApp</h4>
-                                <p class="text-gray-400">(34) 9 9238-6875</p>
+                                <h4 class="font-semibold text-white mb-2">Telefone/WhatsApp</h4>
+                                <p class="text-gray-400 text-lg font-medium">(34) 9 9238-6875</p>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
-                            <div class="gradient-bg p-3 rounded-lg mr-4">
-                                <i class="fas fa-envelope text-white"></i>
+                            <div class="gradient-bg p-4 rounded-xl mr-5">
+                                <i class="fas fa-envelope text-white text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">E-mail</h4>
+                                <h4 class="font-semibold text-white mb-2">E-mail</h4>
                                 <p class="text-gray-400">contato_digitaltech@gmail.com</p>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
-                            <div class="gradient-bg p-3 rounded-lg mr-4">
-                                <i class="fas fa-clock text-white"></i>
+                            <div class="gradient-bg p-4 rounded-xl mr-5">
+                                <i class="fas fa-clock text-white text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-white mb-1">Horário de Atendimento</h4>
+                                <h4 class="font-semibold text-white mb-2">Horário de Atendimento</h4>
                                 <p class="text-gray-400">Seg-Sex: 9h às 18h<br>Sábado: 9h às 13h</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mt-8">
-                        <h4 class="font-semibold text-white mb-4">Siga-nos</h4>
+                    <div class="mt-12">
+                        <h4 class="font-semibold text-white mb-6">Conecte-se Conosco</h4>
                         <div class="flex space-x-4">
-                            <a href="#" class="gradient-bg p-3 rounded-lg hover:opacity-90 transition">
-                                <i class="fab fa-whatsapp text-white"></i>
+                            <a href="#" class="gradient-bg p-4 rounded-xl hover:opacity-90 transition shadow-lg transform hover:-translate-y-1">
+                                <i class="fab fa-whatsapp text-white text-xl"></i>
                             </a>
-                            <a href="#" class="gradient-bg p-3 rounded-lg hover:opacity-90 transition">
-                                <i class="fab fa-instagram text-white"></i>
+                            <a href="#" class="gradient-bg p-4 rounded-xl hover:opacity-90 transition shadow-lg transform hover:-translate-y-1">
+                                <i class="fab fa-instagram text-white text-xl"></i>
                             </a>
-                            <a href="#" class="gradient-bg p-3 rounded-lg hover:opacity-90 transition">
-                                <i class="fab fa-facebook text-white"></i>
+                            <a href="#" class="gradient-bg p-4 rounded-xl hover:opacity-90 transition shadow-lg transform hover:-translate-y-1">
+                                <i class="fab fa-facebook text-white text-xl"></i>
+                            </a>
+                            <a href="#" class="gradient-bg p-4 rounded-xl hover:opacity-90 transition shadow-lg transform hover:-translate-y-1">
+                                <i class="fab fa-linkedin text-white text-xl"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Quick Contact -->
-                <div class="card-glass p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold text-white mb-6">Mensagem Rápida</h3>
+                <!-- Contact Form -->
+                <div class="card-glass p-8 rounded-2xl fade-in">
+                    <h3 class="text-2xl font-bold text-white mb-8">Envie uma Mensagem</h3>
                     <form id="contactForm" class="space-y-6">
                         <div>
-                            <label class="block text-gray-300 mb-2">Seu Nome</label>
-                            <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition">
+                            <label class="block text-gray-300 mb-3 font-medium">Seu Nome</label>
+                            <input type="text" class="form-input w-full rounded-xl px-5 py-4 text-white focus:outline-none">
                         </div>
                         
                         <div>
-                            <label class="block text-gray-300 mb-2">Seu E-mail</label>
-                            <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition">
+                            <label class="block text-gray-300 mb-3 font-medium">Seu E-mail</label>
+                            <input type="email" class="form-input w-full rounded-xl px-5 py-4 text-white focus:outline-none">
                         </div>
                         
                         <div>
-                            <label class="block text-gray-300 mb-2">Mensagem</label>
-                            <textarea rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition"></textarea>
+                            <label class="block text-gray-300 mb-3 font-medium">Serviço de Interesse</label>
+                            <select class="form-input w-full rounded-xl px-5 py-4 text-white focus:outline-none">
+                                <option value="">Selecione um serviço</option>
+                                <option value="maintenance">Manutenção Preventiva</option>
+                                <option value="security">Segurança Digital</option>
+                                <option value="data">Recuperação de Dados</option>
+                                <option value="network">Redes e Wi-Fi</option>
+                                <option value="upgrade">Upgrade de Hardware</option>
+                                <option value="backup">Backup em Nuvem</option>
+                            </select>
                         </div>
                         
-                        <button type="submit" class="btn-primary w-full py-3 rounded-lg font-semibold">
-                            <i class="fas fa-paper-plane mr-2"></i>Enviar Mensagem
+                        <div>
+                            <label class="block text-gray-300 mb-3 font-medium">Mensagem</label>
+                            <textarea rows="5" class="form-input w-full rounded-xl px-5 py-4 text-white focus:outline-none resize-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full py-4 rounded-xl font-semibold text-lg shadow-lg">
+                            <i class="fas fa-paper-plane mr-3"></i>Enviar Mensagem
                         </button>
                     </form>
                 </div>
@@ -460,80 +696,108 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-950 py-12 border-t border-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer class="bg-dark py-16 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
                 <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="gradient-bg p-2 rounded-lg">
-                            <i class="fas fa-laptop-code text-white"></i>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="gradient-bg p-3 rounded-xl shadow-lg">
+                            <i class="fas fa-laptop-code text-white text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white">Digital Tech</h3>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Digital Tech</h3>
+                            <p class="text-sm text-gray-400">Soluções Inteligentes em TI</p>
+                        </div>
                     </div>
-                    <p class="text-gray-400">
-                        Soluções em tecnologia e manutenção de computadores com qualidade e garantia.
+                    <p class="text-gray-400 leading-relaxed">
+                        Especialistas em tecnologia oferecendo soluções inovadoras e suporte técnico de excelência para empresas e residências.
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-semibold text-white mb-4">Links Rápidos</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Serviços</a></li>
-                        <li><a href="cadastro.html" class="text-gray-400 hover:text-white transition">Cadastro</a></li>
-                        <li><a href="orcamento.html" class="text-gray-400 hover:text-white transition">Orçamento</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contato</a></li>
+                    <h4 class="text-lg font-semibold text-white mb-6">Serviços</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Manutenção Preventiva</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Segurança Digital</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Recuperação de Dados</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Redes e Wi-Fi</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-semibold text-white mb-4">Newsletter</h4>
-                    <p class="text-gray-400 mb-4">Receba nossas promoções e dicas de tecnologia.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Seu e-mail" class="flex-1 bg-gray-800 text-white px-4 py-2 rounded-l-lg focus:outline-none">
-                        <button type="submit" class="gradient-bg px-4 rounded-r-lg hover:opacity-90 transition">
-                            <i class="fas fa-paper-plane text-white"></i>
+                    <h4 class="text-lg font-semibold text-white mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#hero" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Início</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Serviços</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Sobre</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition hover:translate-x-1 inline-block">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-6">Receba nossas promoções e dicas de tecnologia em primeira mão.</p>
+                    <form id="newsletterForm" class="flex">
+                        <input type="email" placeholder="Seu e-mail" class="flex-1 form-input rounded-l-xl px-5 py-3 text-white focus:outline-none">
+                        <button type="submit" class="gradient-bg px-6 rounded-r-xl hover:opacity-90 transition">
+                            <i class="fas fa-paper-plane text-white text-lg"></i>
                         </button>
                     </form>
+                    <p class="text-gray-500 text-xs mt-4">Ao se inscrever, você concorda com nossa Política de Privacidade.</p>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-                <p class="text-gray-500">
-                    &copy; 2023 Digital Tech. Todos os direitos reservados.
-                    <span class="block md:inline mt-2 md:mt-0">
-                        Ituiutaba/MG - (34) 9 9238-6875
-                    </span>
+            <div class="border-t border-white/5 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-center md:text-left">
+                        &copy; 2023 Digital Tech. Todos os direitos reservados.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-500 hover:text-white transition">Termos de Uso</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition">Política de Privacidade</a>
+                        <a href="#" class="text-gray-500 hover:text-white transition">Cookies</a>
+                    </div>
+                </div>
+                <p class="text-gray-600 text-center mt-4">
+                    Ituiutaba/MG - (34) 9 9238-6875
                 </p>
             </div>
         </div>
     </footer>
 
     <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden backdrop-blur-sm">
-        <div class="bg-gray-800 rounded-xl p-8 max-w-md w-full mx-4 border border-gray-700">
+    <div id="successModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden backdrop-blur-md">
+        <div class="bg-surface rounded-2xl p-10 max-w-md w-full mx-6 gradient-border animate-modal">
             <div class="text-center">
-                <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-check text-white text-2xl"></i>
+                <div class="gradient-bg w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg">
+                    <i class="fas fa-check text-white text-3xl"></i>
                 </div>
-                <h3 id="modalTitle" class="text-2xl font-bold text-white mb-3">Sucesso!</h3>
-                <p id="modalMessage" class="text-gray-300 mb-8">Sua mensagem foi enviada com sucesso.</p>
-                <button onclick="closeModal()" class="btn-primary w-full py-3 rounded-lg font-semibold">
-                    Fechar
+                <h3 id="modalTitle" class="text-3xl font-bold text-white mb-4">Enviado com Sucesso!</h3>
+                <p id="modalMessage" class="text-gray-300 mb-10 text-lg">Sua mensagem foi enviada. Entraremos em contato em breve!</p>
+                <button onclick="closeModal()" class="btn-primary w-full py-4 rounded-xl font-semibold text-lg shadow-lg">
+                    <i class="fas fa-check mr-3"></i>Entendido
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 gradient-bg text-white p-4 rounded-xl shadow-lg hover:shadow-xl transition-all opacity-0 transform translate-y-4 z-40">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <script>
-        // Mobile menu toggle
+        // Mobile menu toggle with improved animation
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         
         if (mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
-                mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
-                mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+                mobileMenu.classList.toggle('animate-slideInDown');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
             });
             
             // Close menu when clicking links
@@ -549,14 +813,15 @@
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') return;
+                
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
                 const targetElement = document.querySelector(targetId);
+                
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 }
@@ -564,37 +829,156 @@
         });
         
         // Contact form handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            showModal('Mensagem Enviada!', 'Entraremos em contato em até 24 horas úteis.');
-            this.reset();
-        });
+        const contactForm = document.getElementById('contactForm');
+        const newsletterForm = document.getElementById('newsletterForm');
+        
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showModal('Mensagem Enviada!', 'Obrigado pelo seu contato. Retornaremos em até 24 horas úteis.');
+                this.reset();
+            });
+        }
+        
+        if(newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showModal('Inscrito com Sucesso!', 'Você agora receberá nossas novidades e promoções em primeira mão.');
+                this.reset();
+            });
+        }
         
         // Modal functions
         function showModal(title, message) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalMessage').textContent = message;
             document.getElementById('successModal').classList.remove('hidden');
+            
+            // Add animation class
+            const modalContent = document.querySelector('#successModal > div');
+            modalContent.classList.add('animate-modal');
         }
         
         function closeModal() {
             document.getElementById('successModal').classList.add('hidden');
         }
         
-        // Close modal on outside click
+        // Close modal on outside click and ESC key
         document.getElementById('successModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
         
-        // Add scroll effect to header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-lg');
-            } else {
-                header.classList.remove('shadow-lg');
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('successModal').classList.contains('hidden')) {
+                closeModal();
             }
         });
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            
+            // Header shadow on scroll
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-xl');
+            } else {
+                header.classList.remove('shadow-xl');
+            }
+            
+            // Back to top button visibility
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'translate-y-4');
+                backToTopBtn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'translate-y-4');
+                backToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Add CSS animation for modal
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInDown {
+                from {
+                    transform: translateY(-50px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+            
+            .animate-slideInDown {
+                animation: slideInDown 0.3s ease-out;
+            }
+            
+            @keyframes modalAppear {
+                from {
+                    transform: scale(0.9);
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+            
+            .animate-modal {
+                animation: modalAppear 0.3s ease-out;
+            }
+            
+            .stagger-delay > * {
+                opacity: 0;
+                animation: fadeIn 0.8s ease-out forwards;
+                animation-delay: calc(var(--i) * 0.1s);
+            }
+            
+            .fade-in {
+                animation: fadeIn 0.8s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Add hover effect to service cards
+        document.querySelectorAll('.card-glass').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Form validation
+        function validateForm(form) {
+            let isValid = true;
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    input.classList.remove('border-red-500');
+                }
+            });
+            
+            return isValid;
+        }
+        
+        // Initialize tooltips (if needed in the future)
+        console.log('Digital Tech - Soluções em TI carregado com sucesso!');
     </script>
 </body>
 </html>
