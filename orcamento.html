@@ -7,7 +7,8 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="supabase-url" content="https://vohxhccomugyjdnbwrif.supabase.co">
+    <!-- ATUALIZAR AQUI: Substituir pela sua URL do Supabase -->
+    <meta name="supabase-url" content="https://ipdyvgcojdukmoldpfgw.supabase.co">
     <title>Digital Tech - Orçamento</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -711,7 +712,8 @@
                 urgency: document.getElementById('urgency').value,
                 clientEmail: clientEmail,
                 clientName: document.getElementById('clientName').value || '',
-                clientPhone: document.getElementById('clientPhone').value || ''
+                clientPhone: document.getElementById('clientPhone').value || '',
+                created_at: new Date().toISOString()
             };
             
             localStorage.setItem('serviceData', JSON.stringify(serviceData));
@@ -770,7 +772,8 @@
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
         const SUPABASE_URL = document.querySelector('meta[name="supabase-url"]')?.content || '';
-        const SUPABASE_KEY = 'sb_publishable_VnUv3wfgnZgYiS2L0e3Skg_CqBaDwT9';
+        // ATUALIZAR AQUI: Substituir pela sua chave API do Supabase
+        const SUPABASE_KEY = 'sb_publishable_TM0jATR7d2Y-xuLRT10t2g_bXJ6OLKW';
         window.supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     </script>
 </body>
