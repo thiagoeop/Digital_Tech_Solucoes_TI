@@ -705,16 +705,17 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span> Enviando...</span>';
             submitBtn.disabled = true;
             
-            const serviceData = {
-                serviceType: document.getElementById('serviceType').value,
-                equipmentType: document.getElementById('equipmentType').value,
-                problemDescription: document.getElementById('problemDescription').value,
-                urgency: document.getElementById('urgency').value,
-                clientEmail: clientEmail,
-                clientName: document.getElementById('clientName').value || '',
-                clientPhone: document.getElementById('clientPhone').value || '',
-                created_at: new Date().toISOString()
-            };
+           const serviceData = {
+    tipo_servico: document.getElementById('serviceType').value,
+    tipo_equipamento: document.getElementById('equipmentType').value,
+    descricao_problema: document.getElementById('problemDescription').value,
+    urgencia: document.getElementById('urgency').value,
+    email_cliente: clientEmail,  // ← Nome CORRETO
+    nome_cliente: document.getElementById('clientName').value || '',
+    telefone_cliente: document.getElementById('clientPhone').value || '',
+    status: 'pendente',
+    created_at: new Date().toISOString()
+};
             
             localStorage.setItem('serviceData', JSON.stringify(serviceData));
             
@@ -778,3 +779,4 @@
     </script>
 </body>
 </html>
+
