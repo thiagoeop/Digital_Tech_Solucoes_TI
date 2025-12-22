@@ -318,43 +318,43 @@
                     <div id="step1" class="form-step active">
                         <h4 class="text-xl font-bold text-gray-800 mb-6">Selecione o Tipo de Serviço</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                            <!-- VALORES ATUALIZADOS para corresponder à constraint do Supabase -->
-                            <div class="service-option" data-value="Manutenção Preventiva">
+                            <!-- TESTE com diferentes formatos -->
+                            <div class="service-option" data-value="preventiva" data-alt-value="Manutenção Preventiva">
                                 <div class="service-icon gradient-bg text-white">
                                     <i class="fas fa-shield-alt"></i>
                                 </div>
                                 <h5 class="font-bold text-gray-800 mb-2">Manutenção Preventiva</h5>
                                 <p class="text-gray-600 text-sm">Limpeza, otimização e verificação de hardware/software.</p>
                             </div>
-                            <div class="service-option" data-value="Manutenção Corretiva">
+                            <div class="service-option" data-value="corretiva" data-alt-value="Manutenção Corretiva">
                                 <div class="service-icon gradient-bg text-white">
                                     <i class="fas fa-tools"></i>
                                 </div>
                                 <h5 class="font-bold text-gray-800 mb-2">Manutenção Corretiva</h5>
                                 <p class="text-gray-600 text-sm">Reparo de problemas e substituição de componentes.</p>
                             </div>
-                            <div class="service-option" data-value="Remoção de Vírus">
+                            <div class="service-option" data-value="virus" data-alt-value="Remoção de Vírus">
                                 <div class="service-icon gradient-bg text-white">
                                     <i class="fas fa-bug"></i>
                                 </div>
                                 <h5 class="font-bold text-gray-800 mb-2">Remoção de Vírus</h5>
                                 <p class="text-gray-600 text-sm">Eliminação de malware, spyware e outros riscos.</p>
                             </div>
-                            <div class="service-option" data-value="Recuperação de Dados">
+                            <div class="service-option" data-value="dados" data-alt-value="Recuperação de Dados">
                                 <div class="service-icon gradient-bg text-white">
                                     <i class="fas fa-hdd"></i>
                                 </div>
                                 <h5 class="font-bold text-gray-800 mb-2">Recuperação de Dados</h5>
                                 <p class="text-gray-600 text-sm">Recuperação de arquivos perdidos ou corrompidos.</p>
                             </div>
-                            <div class="service-option" data-value="Problemas de Rede">
+                            <div class="service-option" data-value="rede" data-alt-value="Problemas de Rede">
                                 <div class="service-icon gradient-bg text-white">
                                     <i class="fas fa-network-wired"></i>
                                 </div>
                                 <h5 class="font-bold text-gray-800 mb-2">Problemas de Rede</h5>
                                 <p class="text-gray-600 text-sm">Configuração e solução de problemas de rede.</p>
                             </div>
-                            <div class="service-option" data-value="Upgrade de Hardware">
+                            <div class="service-option" data-value="upgrade" data-alt-value="Upgrade de Hardware">
                                 <div class="service-icon gradient-bg text-white">
                                     <i class="fas fa-microchip"></i>
                                 </div>
@@ -381,7 +381,7 @@
                             <select id="equipmentType" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none input-focus select-arrow bg-white/50" required>
                                 <option value="" disabled selected>Selecione o equipamento</option>
                                 <option value="Notebook">Notebook</option>
-                                <option value="Computador Desktop">Computador Desktop</option>
+                                <option value="Desktop">Computador Desktop</option>
                                 <option value="All-in-One">All-in-One</option>
                                 <option value="Servidor">Servidor</option>
                                 <option value="Outro">Outro</option>
@@ -398,7 +398,7 @@
                         <div class="mb-6">
                             <label for="urgency" class="block text-gray-700 font-medium mb-3">Nível de Urgência</label>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                <label class="service-option urgency-option" data-value="Normal">
+                                <label class="service-option urgency-option" data-value="normal">
                                     <div class="flex items-center space-x-3">
                                         <div class="urgency-badge urgency-normal">Normal</div>
                                         <div>
@@ -407,7 +407,7 @@
                                         </div>
                                     </div>
                                 </label>
-                                <label class="service-option urgency-option" data-value="Urgente">
+                                <label class="service-option urgency-option" data-value="urgente">
                                     <div class="flex items-center space-x-3">
                                         <div class="urgency-badge urgency-urgente">Urgente</div>
                                         <div>
@@ -416,7 +416,7 @@
                                         </div>
                                     </div>
                                 </label>
-                                <label class="service-option urgency-option" data-value="Emergência">
+                                <label class="service-option urgency-option" data-value="emergencia">
                                     <div class="flex items-center space-x-3">
                                         <div class="urgency-badge urgency-emergencia">Emergência</div>
                                         <div>
@@ -426,7 +426,7 @@
                                     </div>
                                 </label>
                             </div>
-                            <input type="hidden" id="urgency" name="urgency" value="Normal">
+                            <input type="hidden" id="urgency" name="urgency" value="normal">
                         </div>
                         
                         <div class="flex justify-between mt-10">
@@ -598,7 +598,6 @@
                 });
                 this.classList.add('selected');
                 document.getElementById('serviceType').value = this.dataset.value;
-                console.log('Serviço selecionado:', this.dataset.value); // Debug
             });
         });
         
@@ -610,7 +609,6 @@
                 });
                 this.classList.add('selected');
                 document.getElementById('urgency').value = this.dataset.value;
-                console.log('Urgência selecionada:', this.dataset.value); // Debug
             });
         });
         
@@ -691,7 +689,7 @@
             });
         }
         
-        // Form submission
+        // Form submission - VERSÃO COM DEBUG MELHORADO
         document.getElementById('quoteForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -708,9 +706,31 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span> Enviando...</span>';
             submitBtn.disabled = true;
             
+            // TESTAR DIFERENTES VALORES PARA tipo_servico
+            const serviceValue = document.getElementById('serviceType').value;
+            
+            // Mapeamento de valores possíveis
+            const serviceMapping = {
+                'preventiva': ['Manutenção Preventiva', 'preventiva', 'Preventiva', 'MANUTENÇÃO PREVENTIVA'],
+                'corretiva': ['Manutenção Corretiva', 'corretiva', 'Corretiva', 'MANUTENÇÃO CORRETIVA'],
+                'virus': ['Remoção de Vírus', 'virus', 'Virus', 'REMOCAO VIRUS', 'REMOV_VIRUS'],
+                'dados': ['Recuperação de Dados', 'dados', 'Dados', 'RECUP_DADOS'],
+                'rede': ['Problemas de Rede', 'rede', 'Rede', 'PROB_REDE'],
+                'upgrade': ['Upgrade de Hardware', 'upgrade', 'Upgrade', 'UPG_HARDWARE']
+            };
+            
+            // Vamos testar vários valores possíveis
+            let finalServiceValue = serviceValue;
+            
+            // Se tiver um valor alternativo, use-o primeiro
+            const selectedOption = document.querySelector('.service-option.selected');
+            if (selectedOption && selectedOption.dataset.altValue) {
+                finalServiceValue = selectedOption.dataset.altValue;
+            }
+            
             // Dados CORRETOS com nomes das colunas da tabela
             const serviceData = {
-                tipo_servico: document.getElementById('serviceType').value,
+                tipo_servico: finalServiceValue,
                 tipo_equipamento: document.getElementById('equipmentType').value,
                 descricao_problema: document.getElementById('problemDescription').value,
                 urgencia: document.getElementById('urgency').value,
@@ -722,7 +742,11 @@
             };
             
             // Debug: mostrar dados no console
-            console.log('Dados a serem enviados para Supabase:', serviceData);
+            console.log('=== DEBUG: Dados a serem enviados ===');
+            console.log('tipo_servico:', serviceData.tipo_servico);
+            console.log('tipo_equipamento:', serviceData.tipo_equipamento);
+            console.log('urgencia:', serviceData.urgencia);
+            console.log('=====================');
             
             // Salvar no localStorage (para backup)
             localStorage.setItem('serviceData', JSON.stringify(serviceData));
@@ -730,7 +754,7 @@
             try {
                 const supabaseUrl = document.querySelector('meta[name="supabase-url"]')?.content || '';
                 if (window.supabase && supabaseUrl) {
-                    // Inserir no banco de dados
+                    // Primeiro, vamos tentar inserir com o valor atual
                     const { data, error } = await window.supabase
                         .from('solicitacoes')
                         .insert(serviceData)
@@ -738,11 +762,61 @@
                         .single();
                     
                     if (error) {
-                        console.error('Erro Supabase:', error);
-                        alert('Erro ao salvar no banco: ' + error.message);
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                        return;
+                        console.error('Erro Supabase (tentativa 1):', error);
+                        
+                        // Tentativa 2: Se o erro for de constraint, tentar valores alternativos
+                        if (error.message.includes('check constraint')) {
+                            console.log('Tentando valores alternativos...');
+                            
+                            // Testar valores alternativos baseados no mapeamento
+                            const alternatives = serviceMapping[serviceValue] || [];
+                            let success = false;
+                            
+                            for (let i = 0; i < alternatives.length; i++) {
+                                const altServiceData = {...serviceData};
+                                altServiceData.tipo_servico = alternatives[i];
+                                
+                                console.log(`Tentativa ${i+1}: tipo_servico = "${alternatives[i]}"`);
+                                
+                                const { data: altData, error: altError } = await window.supabase
+                                    .from('solicitacoes')
+                                    .insert(altServiceData)
+                                    .select()
+                                    .single();
+                                
+                                if (!altError) {
+                                    console.log(`Sucesso com valor: "${alternatives[i]}"`);
+                                    success = true;
+                                    
+                                    // Salvar protocolo no localStorage
+                                    localStorage.setItem('serviceProtocol', altData.protocolo || 'DT-' + Date.now());
+                                    
+                                    // Success animation
+                                    submitBtn.innerHTML = '<i class="fas fa-check"></i><span> Enviado com sucesso!</span>';
+                                    submitBtn.classList.remove('gradient-bg');
+                                    submitBtn.classList.add('bg-green-500');
+                                    
+                                    // Redirecionar para confirmação após 1.5 segundos
+                                    setTimeout(() => {
+                                        window.location.href = 'confirmacao.html';
+                                    }, 1500);
+                                    return;
+                                }
+                            }
+                            
+                            if (!success) {
+                                alert('Erro ao salvar no banco: ' + error.message + '\n\nTente selecionar o serviço novamente.');
+                                submitBtn.innerHTML = originalText;
+                                submitBtn.disabled = false;
+                                return;
+                            }
+                        } else {
+                            // Outro tipo de erro
+                            alert('Erro ao salvar no banco: ' + error.message);
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            return;
+                        }
                     } else {
                         console.log('Dados salvos com sucesso:', data);
                         
@@ -801,6 +875,32 @@
         // ATUALIZAR AQUI: Substituir pela sua chave API do Supabase
         const SUPABASE_KEY = 'sb_publishable_TM0jATR7d2Y-xuLRT10t2g_bXJ6OLKW';
         window.supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        // Função para verificar os valores permitidos na tabela
+        async function checkAllowedValues() {
+            try {
+                // Tentar buscar alguns dados existentes para ver os valores
+                const { data, error } = await window.supabase
+                    .from('solicitacoes')
+                    .select('tipo_servico')
+                    .limit(5);
+                
+                if (!error && data && data.length > 0) {
+                    console.log('=== VALORES EXISTENTES NA TABELA ===');
+                    const uniqueValues = [...new Set(data.map(item => item.tipo_servico))];
+                    console.log('Valores únicos de tipo_servico:', uniqueValues);
+                    console.log('====================================');
+                    
+                    // Mostrar alerta informativo
+                    alert('Valores permitidos para "tipo_servico":\n' + uniqueValues.join('\n'));
+                }
+            } catch (err) {
+                console.error('Erro ao verificar valores:', err);
+            }
+        }
+        
+        // Expor a função globalmente para teste
+        window.checkAllowedValues = checkAllowedValues;
     </script>
 </body>
 </html>
